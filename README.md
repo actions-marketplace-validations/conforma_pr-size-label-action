@@ -5,9 +5,10 @@ A GitHub Action that automatically labels pull requests based on their size (add
 ## Features
 
 - Automatically calculates PR size from additions and deletions
-- Removes existing size labels before adding new ones
+- Intelligently updates labels only when size category changes
 - Supports size categories: XS, S, M, L, XL, XXL
 - Works with any repository
+- Prevents unnecessary label updates for better UX
 
 ## Size Categories
 
@@ -30,12 +31,16 @@ on:
   pull_request_target:
     types: [opened, synchronize]
 
+permissions:
+  pull-requests: write
+  issues: write
+
 jobs:
   size-label:
     runs-on: ubuntu-latest
     steps:
       - name: Label PR by size
-        uses: conforma/pr-size-label-action@v1
+        uses: conforma/pr-size-label-action@v1.0.0
 ```
 
 ### With Custom Token
@@ -46,12 +51,16 @@ on:
   pull_request_target:
     types: [opened, synchronize]
 
+permissions:
+  pull-requests: write
+  issues: write
+
 jobs:
   size-label:
     runs-on: ubuntu-latest
     steps:
       - name: Label PR by size
-        uses: conforma/pr-size-label-action@v1
+        uses: conforma/pr-size-label-action@v1.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```

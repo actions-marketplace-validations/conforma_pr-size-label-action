@@ -1,0 +1,16 @@
+name: 'PR Size Label'
+description: 'Automatically labels pull requests based on their size (additions + deletions)'
+author: 'Conforma'
+branding:
+  icon: 'tag'
+  color: 'blue'
+
+inputs:
+  token:
+    description: 'GitHub token for API access'
+    required: true
+    default: ${{ github.token }}
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

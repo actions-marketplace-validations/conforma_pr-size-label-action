@@ -31883,7 +31883,17 @@ async function run() {
       issue_number: prNumber
     });
     
-    // Remove existing size labels
+    const newLabel = `size: ${sizeLabel}`;
+    
+    // Check if the correct label already exists
+    const hasCorrectLabel = currentLabels.some(label => label.name === newLabel);
+    
+    if (hasCorrectLabel) {
+      console.log(`PR already has the correct label: ${newLabel}. No changes needed.`);
+      return;
+    }
+    
+    // Remove existing size labels (only if we need to change)
     const sizeLabels = currentLabels.filter(label => label.name.startsWith('size:'));
     console.log(`Found ${sizeLabels.length} existing size labels to remove`);
     
@@ -31898,7 +31908,6 @@ async function run() {
     }
     
     // Add new size label
-    const newLabel = `size: ${sizeLabel}`;
     console.log(`Adding label: ${newLabel}`);
     
     await octokit.rest.issues.addLabels({

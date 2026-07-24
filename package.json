@@ -4,12 +4,15 @@
   "description": "GitHub Action to automatically label PRs based on size",
   "main": "dist/index.js",
   "scripts": {
-    "build": "ncc build src/index.js -o dist",
+    "build": "ncc build src/main.js -o dist",
     "test": "jest"
   },
   "keywords": ["github", "action", "pr", "label", "size"],
   "author": "Conforma",
-  "license": "MIT",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=24"
+  },
   "dependencies": {
     "@actions/core": "^2.0.0",
     "@actions/github": "^6.0.0"
